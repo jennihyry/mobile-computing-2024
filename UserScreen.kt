@@ -58,9 +58,6 @@ fun UserScreen(
         selectedImageUri = getImageUriFromStorage(context=context)
     }
 
-    println("USER SCREEN URI: ")
-    println(selectedImageUri)
-
     val photoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri -> selectedImageUri = uri }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.net.Uri
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.animateContentSize
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -19,6 +18,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -50,7 +50,8 @@ var imageId = R.drawable.android_image
 fun MainScreen(navController: NavController,
                state: UserState,
                onEvent: (UserEvent) -> Unit,
-               context: Context) {
+               context: Context
+) {
     // Here comes the code that defines what our main screen looks like. Because we want
     // the conversation to be the main screen, lets call the function conversation
     Column(modifier=Modifier.padding(all=8.dp), horizontalAlignment = Alignment.End) {
@@ -72,11 +73,20 @@ fun MainScreen(navController: NavController,
             )
         }
 
-        val uri = getImageUriFromStorage(context = context)
+        Button(
+            onClick = {
+                // send notification
+                NotificationUtils.sendNotification(context, "uujee", "jee")
+            })
+        {
+            Text("Send notification")
+        }
 
+        val uri = getImageUriFromStorage(context = context)
 
         onEvent(UserEvent.LoadUserName) // loads the latest db entry username to state
         Conversation(SampleData.conversationSample, state, uri)
+
     }
 }
 
